@@ -187,6 +187,7 @@
             margin-top: 3px;
             accent-color: var(--accent);
             transform: scale(1.2);
+            cursor: pointer;
         }
 
         .clickable-text {
@@ -362,7 +363,7 @@
             </label>
 
             <label class="custom-check">
-                <input type="checkbox" id="termsCheck" required name="Sartlar_Onayi" onclick="return false;"> 
+                <input type="checkbox" id="termsCheck" required name="Sartlar_Onayi" onclick="event.preventDefault(); openModal()"> 
                 <span id="txt-check2" onclick="openModal()">
                     <span class="clickable-text" id="link-terms">Etkinlik Katılım Şartları'nı okudum, kabul ediyorum.</span> 
                     <span id="txt-check2-suffix">Kişisel verilerimin işlenmesine rıza gösteriyorum.</span>
@@ -519,6 +520,7 @@
         
         // Scroll event listener
         modalBody.onscroll = function() {
+            // Scroll toleransını 5px'den 20px'e çıkardım ki mobilde takılmasın
             if (modalBody.scrollTop + modalBody.clientHeight >= modalBody.scrollHeight - 20) {
                 approveBtn.disabled = false;
                 approveBtn.classList.add('active');
@@ -532,10 +534,10 @@
         modal.style.display = "none";
     }
 
-    // Modal dışına tıklayınca kapatma (isteğe bağlı, şu an kapalı ki okusunlar)
+    // Modal dışına tıklayınca kapatma
     window.onclick = function(event) {
         if (event.target == modal) {
-            // modal.style.display = "none"; // İstersen bunu açabilirsin ama okumaları için kapalı kalsın
+            // modal.style.display = "none";
         }
     }
     
