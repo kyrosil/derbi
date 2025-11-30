@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyrosil Dev Derbi Etkinliği</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --gold: #ffd700;
+            --fb-color: #002d72;
+            --gs-color: #a90432;
+            --text-light: #fff;
+            --text-dark: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        /* Dil Butonu */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        .lang-switch:hover { background: rgba(255,255,255,0.2); }
+
+        /* Kyrosil Logo */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .brand-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            padding: 5px;
+        }
+
+        /* Başlıklar */
+        h1 {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Ödül Kutusu */
+        .prize-box {
+            background: linear-gradient(45deg, #FFD700, #FDB931);
+            color: #000;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            animation: pulse 2s infinite;
+            border: 2px solid #fff;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+
+        /* Form Elemanları */
+        .form-group { margin-bottom: 15px; }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #ddd;
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* Skor Alanı */
+        .match-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0,0,0,0.4);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+        }
+
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.2));
+        }
+
+        .vs { font-size: 1.5rem; font-weight: bold; color: #888; }
+
+        .score-inputs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .score-input {
+            width: 50px !important;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem !important;
+            font-weight: bold;
+        }
+
+        /* Checkbox Alanı */
+        .checkbox-group {
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        .custom-check {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .custom-check input {
+            margin-right: 10px;
+            margin-top: 3px;
+            accent-color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .clickable-text {
+            color: var(--gold);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        /* Gönder Butonu */
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #e94560, #a90432);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover { transform: translateY(-2px); }
+        .submit-btn:disabled { background: #555; cursor: not-allowed; transform: none; }
+
+        /* POPUP MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1e1e2f;
+            margin: 15px;
+            padding: 20px;
+            border: 1px solid #444;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+        }
+
+        .modal-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .modal-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 10px;
+            text-align: justify;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        /* Scrollbar stilleri */
+        .modal-body::-webkit-scrollbar { width: 8px; }
+        .modal-body::-webkit-scrollbar-track { background: #333; }
+        .modal-body::-webkit-scrollbar-thumb { background: #666; border-radius: 4px; }
+
+        .modal-footer {
+            text-align: center;
+        }
+
+        .approve-btn {
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        
+        .approve-btn.active {
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        /* Mobil Ayarları */
+        @media (max-width: 480px) {
+            .score-input { width: 40px !important; height: 40px; font-size: 1.2rem !important; }
+            .team-logo { width: 50px; height: 50px; }
+            .container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button class="lang-switch" onclick="toggleLanguage()">🇬🇧 EN</button>
+
+    <div class="brand-header">
+        <img src="https://i0.wp.com/kyrosil.eu/wp-content/uploads/2025/04/adsiz-tasarim.png?fit=500%2C500&ssl=1" alt="Kyrosil Logo" class="brand-logo">
+        <h1 id="mainTitle">Kyrosil'den Dev Derbiye Özel Etkinlik!</h1>
+        <p id="subTitle" style="color: #bbb; font-size: 0.9rem;">Skor tahminini yap, kazanan sen ol!</p>
+    </div>
+
+    <div class="prize-box">
+        <i class="fas fa-trophy"></i> 
+        <span id="prizeText">10.000 USDT ÖDÜL HAVUZU</span>
+        <div id="prizeSubText" style="font-size: 0.8rem; font-weight: normal; margin-top:5px;">10 Doğru Tahmine 1.000'er USDT</div>
+    </div>
+
+    <form action="https://formspree.io/f/xeoyenvo" method="POST" id="derbyForm">
+        
+        <div class="form-group">
+            <label for="fullName" id="lbl-name">AD - SOYAD</label>
+            <input type="text" id="fullName" name="Ad_Soyad" required placeholder="Adınız Soyadınız">
+        </div>
+
+        <div class="form-group">
+            <label for="username" id="lbl-username">Instagram veya EU Portal Kullanıcı Adı</label>
+            <input type="text" id="username" name="Kullanici_Adi" required placeholder="@kullaniciadi">
+        </div>
+
+        <div class="form-group">
+            <label for="wallet" id="lbl-wallet">USDT (ERC-20) Cüzdan Adresi</label>
+            <input type="text" id="wallet" name="Wallet_ERC20" required placeholder="0x...">
+        </div>
+
+        <label id="lbl-prediction" style="text-align: center; margin-bottom: 10px; color:var(--gold);">SKOR TAHMİNİ</label>
+        
+        <div class="match-area">
+            <div class="team">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.S1iyRFcRE9oHRmQU10yV4wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="team-logo" alt="FB">
+                <span style="color:#fce300; font-weight:bold;">FB</span>
+            </div>
+            
+            <div class="score-inputs">
+                <input type="number" name="Skor_FB" class="score-input" min="0" required placeholder="0">
+                <span class="vs">-</span>
+                <input type="number" name="Skor_GS" class="score-input" min="0" required placeholder="0">
+            </div>
+
+            <div class="team">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.I-nkYS9Ch9ECxG57if1BjwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="team-logo" alt="GS">
+                <span style="color:#fdb913; font-weight:bold;">GS</span>
+            </div>
+        </div>
+
+        <div class="checkbox-group">
+            <label class="custom-check">
+                <input type="checkbox" required name="Takip_Onayi">
+                <span id="txt-check1">@kyrosil'i Instagram veya EU Portal üzerinden takip ettiğimi onaylıyorum.</span>
+            </label>
+
+            <label class="custom-check">
+                <input type="checkbox" id="termsCheck" required name="Sartlar_Onayi" onclick="return false;"> 
+                <span id="txt-check2" onclick="openModal()">
+                    <span class="clickable-text" id="link-terms">Etkinlik Katılım Şartları'nı okudum, kabul ediyorum.</span> 
+                    <span id="txt-check2-suffix">Kişisel verilerimin işlenmesine rıza gösteriyorum.</span>
+                </span>
+            </label>
+        </div>
+
+        <button type="submit" class="submit-btn" id="btn-submit">TAHMİNİ GÖNDER 🚀</button>
+    </form>
+</div>
+
+<div id="termsModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span id="modalTitle">ŞARTLAR VE KOŞULLAR</span>
+        </div>
+        <div class="modal-body" id="modalText">
+            </div>
+        <div class="modal-footer">
+            <button id="approveBtn" class="approve-btn" onclick="approveTerms()" disabled>OKUDUM, ONAYLIYORUM</button>
+            <div id="scrollWarning" style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">(Lütfen metni sonuna kadar kaydırın)</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // DİL VERİLERİ
+    const langData = {
+        tr: {
+            title: "Kyrosil'den Dev Derbiye Özel Etkinlik!",
+            subTitle: "Skor tahminini yap, 10.000 USDT'yi bölüşecek 10 kişiden biri ol!",
+            prizeMain: "10.000 USDT ÖDÜL HAVUZU",
+            prizeSub: "10 Doğru Tahmine 1.000'er USDT",
+            lblName: "AD - SOYAD",
+            lblUser: "Instagram veya EU Portal Kullanıcı Adı",
+            lblWallet: "USDT (ERC-20 AĞI) ADRESİ",
+            lblPred: "SKOR TAHMİNİ",
+            check1: "@kyrosil'i Instagram veya EU Portal üzerinden takip ettiğimi onaylıyorum.",
+            check2Link: "Etkinlik Katılım Şartları'nı okudum, kabul ediyorum.",
+            check2Suffix: "Kişisel verilerimin KVKK/GDPR kapsamında işlenmesine rıza gösteriyorum.",
+            btnSubmit: "TAHMİNİ GÖNDER 🚀",
+            modalTitle: "KATILIM KOŞULLARI & AYDINLATMA METNİ",
+            modalBtn: "OKUDUM, ONAYLIYORUM",
+            scrollWarn: "(Lütfen metni sonuna kadar kaydırın)",
+            termsContent: `
+                <p><strong>ETKİNLİK KATILIM KOŞULLARI VE KİŞİSEL VERİLERİN KORUNMASI (KVKK/GDPR) AYDINLATMA METNİ</strong></p>
+                <p>İşbu formu doldurarak Kyrosil ("Şirket") tarafından düzenlenen "Dev Derbi Skor Tahmin Etkinliği"ne katılım sağladığınızı ve aşağıdaki şartları kabul ettiğinizi beyan edersiniz:</p>
+                <br>
+                <p><strong>1. Katılım Şartları:</strong></p>
+                <ul>
+                    <li>Katılımcının @KYROSİL Instagram hesabını takip etmesi veya Kyrosil EU Portal üyesi olması zorunludur. Ödül dağıtımı öncesinde bu şartın sağlanıp sağlanmadığı kontrol edilecektir.</li>
+                    <li>Toplam ödül havuzu 10.000 USDT olup, standart kurguda doğru bilen 10 kişiye 1.000'er USDT dağıtılacaktır.</li>
+                    <li>Doğru tahmin sayısının 10 kişiyi aşması durumunda; Şirket, ödül havuzunu artırarak paylaştırma veya çekiliş yapma hakkını saklı tutar. Bu konudaki nihai yöntem Şirket tarafından etkinlik bitiminde duyurulacaktır.</li>
+                </ul>
+                <br>
+                <p><strong>2. KVKK ve GDPR Kapsamında Açık Rıza:</strong></p>
+                <p>6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") ve Avrupa Birliği Genel Veri Koruma Tüzüğü ("GDPR") uyarınca;</p>
+                <p><strong>İşlenen Veriler:</strong> Ad, Soyad, Kullanıcı Adı (Instagram/Portal), İletişim Bilgileri ve Cüzdan (Wallet) Adresi.</p>
+                <p><strong>İşleme Amacı:</strong> Paylaştığım kişisel verilerin; kazananların belirlenmesi, ödül transferlerinin gerçekleştirilmesi, şüpheli işlemlerin (bot/fake hesap) önlenmesi ve Kyrosil kampanyaları hakkında bilgilendirme yapılması amacıyla işlenmesine, saklanmasına ve gerekli hallerde iş ortaklarıyla (ödül dağıtım aracıları vb.) paylaşılmasına özgür irademle rıza gösteriyorum.</p>
+                <br>
+                <p><strong>3. Beyan:</strong></p>
+                <p>Verdiğim bilgilerin doğru ve güncel olduğunu, aksi takdirde ödül hakkımı kaybedeceğimi kabul ederim.</p>
+                <br><br><br> `
+        },
+        en: {
+            title: "Special Derby Event by Kyrosil!",
+            subTitle: "Predict the score, be one of the 10 people to share 10,000 USDT!",
+            prizeMain: "10,000 USDT PRIZE POOL",
+            prizeSub: "1,000 USDT for 10 Correct Predictions",
+            lblName: "NAME - SURNAME",
+            lblUser: "Instagram or EU Portal Username",
+            lblWallet: "USDT (ERC-20 NETWORK) ADDRESS",
+            lblPred: "SCORE PREDICTION",
+            check1: "I confirm that I follow @kyrosil on Instagram or EU Portal.",
+            check2Link: "I have read and accept the Event Participation Terms.",
+            check2Suffix: "I consent to the processing of my personal data under GDPR/KVKK.",
+            btnSubmit: "SUBMIT PREDICTION 🚀",
+            modalTitle: "PARTICIPATION TERMS & PRIVACY NOTICE",
+            modalBtn: "I READ & APPROVE",
+            scrollWarn: "(Please scroll to the end of the text)",
+            termsContent: `
+                <p><strong>EVENT PARTICIPATION TERMS & CONDITIONS AND PERSONAL DATA PROTECTION (KVKK/GDPR) PRIVACY NOTICE</strong></p>
+                <p>By completing this form, you declare that you are participating in the "Big Derby Score Prediction Event" organized by Kyrosil (the "Company") and that you accept the terms and conditions outlined below:</p>
+                <br>
+                <p><strong>1. Participation Terms:</strong></p>
+                <ul>
+                    <li>It is mandatory for the participant to follow the @KYROSİL Instagram account OR be a registered member of the Kyrosil EU Portal. Verification of this requirement will be conducted prior to the distribution of prizes.</li>
+                    <li>The total prize pool is 10,000 USDT. In the standard scenario, 1,000 USDT will be distributed to each of the 10 individuals who predict the score correctly.</li>
+                    <li>In the event that the number of correct predictions exceeds 10 people, the Company reserves the right to increase the prize pool and share it equally among the winners OR to conduct a draw/raffle. The final method regarding this will be announced by the Company at the conclusion of the event.</li>
+                </ul>
+                <br>
+                <p><strong>2. Explicit Consent under KVKK and GDPR:</strong></p>
+                <p>Pursuant to the Law on the Protection of Personal Data No. 6698 ("KVKK") and the European Union General Data Protection Regulation ("GDPR");</p>
+                <p><strong>Processed Data:</strong> Name, Surname, Username (Instagram/Portal), Contact Information, and Wallet Address.</p>
+                <p><strong>Purpose of Processing:</strong> I hereby give my explicit consent with my free will for the personal data I have shared to be processed and stored for the purposes of determining winners, executing prize transfers, preventing suspicious activities (bots/fake accounts), and providing information about Kyrosil campaigns. I also consent to the sharing of this data with business partners (prize distribution intermediaries, etc.) where necessary.</p>
+                <br>
+                <p><strong>3. Declaration:</strong></p>
+                <p>I accept that the information I have provided is accurate and up-to-date, and I acknowledge that I will forfeit my right to the prize otherwise.</p>
+                <br><br><br>
+            `
+        }
+    };
+
+    let currentLang = 'tr';
+
+    function toggleLanguage() {
+        currentLang = currentLang === 'tr' ? 'en' : 'tr';
+        const btn = document.querySelector('.lang-switch');
+        btn.textContent = currentLang === 'tr' ? '🇬🇧 EN' : '🇹🇷 TR';
+        updateContent();
+    }
+
+    function updateContent() {
+        const data = langData[currentLang];
+        document.getElementById('mainTitle').textContent = data.title;
+        document.getElementById('subTitle').textContent = data.subTitle;
+        document.getElementById('prizeText').textContent = data.prizeMain;
+        document.getElementById('prizeSubText').textContent = data.prizeSub;
+        document.getElementById('lbl-name').textContent = data.lblName;
+        document.getElementById('lbl-username').textContent = data.lblUser;
+        document.getElementById('lbl-wallet').textContent = data.lblWallet;
+        document.getElementById('lbl-prediction').textContent = data.lblPred;
+        document.getElementById('txt-check1').textContent = data.check1;
+        document.getElementById('link-terms').textContent = data.check2Link;
+        document.getElementById('txt-check2-suffix').textContent = data.check2Suffix;
+        document.getElementById('btn-submit').textContent = data.btnSubmit;
+        
+        // Modal Text Güncellemesi
+        document.getElementById('modalTitle').textContent = data.modalTitle;
+        document.getElementById('modalText').innerHTML = data.termsContent;
+        document.getElementById('approveBtn').textContent = data.modalBtn;
+        document.getElementById('scrollWarning').textContent = data.scrollWarn;
+        
+        // Modal açıksa ve dil değişirse scroll eventini sıfırla/yenile
+        resetModalState();
+    }
+
+    // Modal İşlemleri
+    const modal = document.getElementById('termsModal');
+    const modalBody = document.getElementById('modalText');
+    const approveBtn = document.getElementById('approveBtn');
+    const termsCheck = document.getElementById('termsCheck');
+
+    function openModal() {
+        updateContent(); // İçeriği dile göre yükle
+        modal.style.display = "flex";
+        resetModalState();
+    }
+
+    function resetModalState() {
+        approveBtn.disabled = true;
+        approveBtn.classList.remove('active');
+        document.getElementById('scrollWarning').style.display = 'block';
+        
+        // Scroll event listener
+        modalBody.onscroll = function() {
+            if (modalBody.scrollTop + modalBody.clientHeight >= modalBody.scrollHeight - 20) {
+                approveBtn.disabled = false;
+                approveBtn.classList.add('active');
+                document.getElementById('scrollWarning').style.display = 'none';
+            }
+        };
+    }
+
+    function approveTerms() {
+        termsCheck.checked = true;
+        modal.style.display = "none";
+    }
+
+    // Modal dışına tıklayınca kapatma (isteğe bağlı, şu an kapalı ki okusunlar)
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            // modal.style.display = "none"; // İstersen bunu açabilirsin ama okumaları için kapalı kalsın
+        }
+    }
+    
+    // İlk yüklemede içeriği hazırla
+    updateContent();
+
+</script>
+
+</body>
+</html>
