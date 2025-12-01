@@ -1,261 +1,448 @@
-<style>
-    /* Global Container Styling */
-    #kyrosil-result-wrapper {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
-        color: #f0f0f0;
-        padding: 30px 20px;
-        border-radius: 10px;
-        max-width: 800px;
-        margin: 20px auto;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    }
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyrosil Derby Sonuçları | FB 1 - 1 GS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    /* Header & Match Info */
-    .result-header {
-        text-align: center;
-        margin-bottom: 25px;
-        border-bottom: 2px solid rgba(255, 215, 0, 0.5);
-        padding-bottom: 15px;
-    }
-    .result-header img {
-        width: 70px; 
-        height: 70px; 
-        border-radius: 50%; 
-        margin-bottom: 10px;
-        background: white;
-        padding: 5px;
-    }
-    .match-score {
-        font-size: 2.5rem;
-        font-weight: 900;
-        color: #ffd700; /* Gold */
-        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-    }
-    .main-title {
-        font-size: 1.5rem;
-        color: #ddd;
-        margin-top: 10px;
-    }
-
-    /* Prize Info Box */
-    .prize-info {
-        background: rgba(0, 0, 0, 0.3);
-        border: 1px solid #e94560; /* Kırmızı vurgu */
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        text-align: left;
-    }
-    .prize-info p {
-        margin: 5px 0;
-        line-height: 1.4;
-    }
-    .prize-value {
-        font-weight: bold;
-        color: #fdb913; /* Sarı vurgu */
-        font-size: 1.1rem;
-    }
-
-    /* Search & List Container */
-    #searchInput {
-        width: 100%;
-        padding: 12px 15px;
-        margin-bottom: 20px;
-        border: 1px solid #e94560;
-        border-radius: 5px;
-        background: #333;
-        color: white;
-        font-size: 1rem;
-    }
-    
-    .winner-list-container {
-        max-height: 600px;
-        overflow-y: auto;
-        border: 1px solid #444;
-        padding: 10px;
-        border-radius: 5px;
-        background: #222;
-    }
-
-    /* Winner List Styling */
-    #winnerList {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 8px;
-    }
-    #winnerList li {
-        background: #3a3a3a;
-        padding: 8px 15px;
-        border-radius: 4px;
-        font-size: 0.95rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        transition: background 0.2s;
-        border-left: 5px solid #002d72; /* FB Lacivert vurgu */
-    }
-    #winnerList li:nth-child(even) {
-        border-left: 5px solid #a90432; /* GS Kırmızı vurgu */
-    }
-    #winnerList li:hover {
-        background: #4a4a4a;
-    }
-    .list-number {
-        color: #ffd700;
-        font-weight: bold;
-        margin-right: 10px;
-    }
-    
-    /* Mobile adjustments */
-    @media (max-width: 600px) {
-        #winnerList {
-            grid-template-columns: 1fr;
+    <style>
+        /* Sadece bu wrapper içindeki elementleri etkilemesi için ID kullandım */
+        #kyrosil-derby-wrapper {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            max-width: 600px;
+            margin: 20px auto;
+            position: relative;
+            box-sizing: border-box;
         }
-        #kyrosil-result-wrapper {
+        #kyrosil-derby-wrapper * {
+            box-sizing: border-box;
+        }
+        /* Dil Butonu */
+        #kyrosil-derby-wrapper .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        #kyrosil-derby-wrapper .lang-switch:hover { background: rgba(255,255,255,0.2); }
+        /* Kyrosil Logo */
+        #kyrosil-derby-wrapper .brand-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #kyrosil-derby-wrapper .brand-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            padding: 5px;
+        }
+        /* Başlıklar */
+        #kyrosil-derby-wrapper h2.main-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+        }
+        /* Ödül Kutusu */
+        #kyrosil-derby-wrapper .prize-box {
+            background: linear-gradient(45deg, #FFD700, #FDB931);
+            color: #000;
             padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            animation: pulse 2s infinite;
+            border: 2px solid #fff;
         }
-    }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+        }
+        
+        /* Yeni Eklenen Sonuç CSS'leri */
+        #kyrosil-derby-wrapper h2.result-title {
+            color: #ffd700;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: 10px;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+        }
 
-    /* Language Toggle Button */
-    .lang-toggle-btn {
-        background: #e94560;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-bottom: 15px;
-    }
-</style>
+        #kyrosil-derby-wrapper .result-score {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+        }
 
-<div id="kyrosil-result-wrapper">
+        /* Kazananlar Listesi Alanı */
+        #kyrosil-derby-wrapper .winners-area {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        #kyrosil-derby-wrapper .search-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        #kyrosil-derby-wrapper #winnerList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #kyrosil-derby-wrapper #winnerList li {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+            font-size: 1rem;
+        }
+
+        #kyrosil-derby-wrapper #winnerList li:last-child {
+            border-bottom: none;
+        }
+
+        #kyrosil-derby-wrapper .username {
+            font-weight: bold;
+            color: #eee;
+        }
+
+        #kyrosil-derby-wrapper .list-index {
+            color: #ffd700;
+            margin-right: 10px;
+            min-width: 40px; /* Sıra numarasını hizalamak için */
+            text-align: left;
+        }
+
+        /* Sayfalama (Pagination) */
+        #kyrosil-derby-wrapper .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        #kyrosil-derby-wrapper .pagination button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 12px;
+            margin: 3px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            font-size: 0.9rem;
+        }
+
+        #kyrosil-derby-wrapper .pagination button:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        #kyrosil-derby-wrapper .pagination button.active-page {
+            background: #e94560;
+            font-weight: bold;
+            border-color: #e94560;
+        }
+
+        #kyrosil-derby-wrapper .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Hesaplama Bilgisi */
+        #kyrosil-derby-wrapper .calculation-info {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #ddd;
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        @media (max-width: 480px) {
+            #kyrosil-derby-wrapper { padding: 1.5rem; margin: 10px auto; }
+            #kyrosil-derby-wrapper .result-score { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="kyrosil-derby-wrapper">
+    <button class="lang-switch" onclick="toggleLanguage()">🇬🇧 EN</button>
     
-    <button class="lang-toggle-btn" onclick="toggleLanguage()">Switch to English 🇬🇧</button>
+    <div class="brand-header">
+        <img src="https://i0.wp.com/kyrosil.eu/wp-content/uploads/2025/04/adsiz-tasarim.png?fit=500%2C500&ssl=1" alt="Kyrosil Logo" class="brand-logo">
+        <h2 class="main-title" id="mainTitle">Kyrosil Etkinlik Sonuçları</h2>
+        <p id="subTitle" style="color: #bbb; font-size: 0.9rem; text-align:center;">Büyük derbi skor tahmini sonuçları açıklandı!</p>
+    </div>
+    
+    <h2 class="result-title" id="resultTitle">MAÇ SONUCU VE KAZANANLAR</h2>
+    <div class="result-score">FB 1 - 1 GS</div>
 
-    <div id="tr-content">
-        <div class="result-header">
-            <img src="https://i0.wp.com/kyrosil.eu/wp-content/uploads/2025/04/adsiz-tasarim.png?fit=500%2C500&ssl=1" alt="Kyrosil Logo">
-            <h1 class="match-score">Fenerbahçe 1 - Galatasaray 1</h1>
-            <p class="main-title">KYROSIL DEV DERBİ TAHMİN ETKİNLİĞİ SONUCU</p>
-        </div>
-        
-        <div class="prize-info">
-            <p>Doğru Bilen Kişi Sayısı: <span class="prize-value">549</span></p>
-            <p>Toplam Ödül Havuzu: <span class="prize-value">40.000 USDT</span></p>
-            <p>Kişi Başı Kazanılan Tutar: <span class="prize-value">~72.86 USDT</span></p>
-            <p style="font-size: 0.85rem; color: #ccc;">*Ödül dağıtımı cüzdan adreslerinize en kısa sürede yapılacaktır.</p>
-        </div>
-        
-        <h2>Kazanan Kullanıcı Adı Arama</h2>
-        <p style="color: #ccc; margin-bottom: 10px; font-size: 0.9rem;">(Kazananlar listesindeki Instagram veya EU Portal kullanıcı adınızı arayın)</p>
+    <div class="prize-box">
+        <i class="fas fa-money-bill-wave"></i> 
+        <span id="prizeTextResult">549 Doğru Tahmin İçin 40.000 USDT Dağıtıldı!</span>
     </div>
 
-    <div id="en-content" style="display:none;">
-        <div class="result-header">
-             <img src="https://i0.wp.com/kyrosil.eu/wp-content/uploads/2025/04/adsiz-tasarim.png?fit=500%2C500&ssl=1" alt="Kyrosil Logo">
-            <h1 class="match-score">Fenerbahçe 1 - Galatasaray 1</h1>
-            <p class="main-title">KYROSIL BIG DERBY PREDICTION EVENT RESULT</p>
-        </div>
-        
-        <div class="prize-info">
-            <p>Total Correct Guesses: <span class="prize-value">549</span></p>
-            <p>Total Prize Pool: <span class="prize-value">40,000 USDT</span></p>
-            <p>Prize Per Winner: <span class="prize-value">~72.86 USDT</span></p>
-            <p style="font-size: 0.85rem; color: #ccc;">*Prize distribution will be made to your wallet addresses as soon as possible.</p>
+    <div class="calculation-info" id="calculationInfo">
         </div>
 
-        <h2>Search for Your Winning Username</h2>
-        <p style="color: #ccc; margin-bottom: 10px; font-size: 0.9rem;">(Search for your Instagram or EU Portal username in the winners list)</p>
-    </div>
-
-    <input type="text" id="searchInput" onkeyup="searchWinners()" placeholder="Kullanıcı Adınızı Buraya Yazın / Type Your Username Here">
-    
-    <div class="winner-list-container">
+    <div class="winners-area">
+        <input type="text" id="searchUsername" class="search-input" placeholder="Kullanıcı adını ara..." onkeyup="filterWinners()">
         <ul id="winnerList">
             </ul>
+        <div class="pagination" id="pagination">
+            </div>
     </div>
 </div>
 
 <script>
-    // --- 1. KULLANICI ADI ÜRETME FONKSİYONU ---
-    function generateUsernames(count) {
-        const usernames = [];
-        const baseNames = ['kyro_', 'fb_fan_', 'gs_ultra_', 'winner_', 'crypto_gess_'];
-        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789_';
-
-        // 549 adet rastgele kullanıcı adı üretme
-        for (let i = 1; i <= count; i++) {
-            let name = baseNames[i % baseNames.length] + (1000 + i);
-            
-            // Rastgele ekler
-            if (i % 5 === 0) {
-                name += chars.charAt(Math.floor(Math.random() * 10));
-            }
-            if (i % 7 === 0) {
-                name += '_x';
-            }
-            // Çift basamaklı rastgele sayı ekleyelim (daha gerçekçi)
-            name += Math.floor(Math.random() * 90 + 10);
-            
-            usernames.push(name);
+    const langData = {
+        tr: {
+            // Yeni sonuç sayfası metinleri
+            mainTitle: "Kyrosil Etkinlik Sonuçları",
+            subTitle: "Büyük derbi skor tahmini sonuçları açıklandı!",
+            resultTitle: "MAÇ SONUCU VE KAZANANLAR",
+            prizeResult: (count) => `${count} Doğru Tahmin İçin 40.000 USDT Dağıtıldı!`,
+            calculation: (count, amount) => `
+                <p>TOPLAM ÖDÜL: $40.000 / KAZANAN SAYISI: ${count}</p>
+                <p>KİŞİ BAŞI KAZANÇ: <span style="color:#ffd700; font-size:1.1rem; font-weight:bold;">$${amount.toFixed(2)}</span> USDT</p>
+            `,
+            searchPlaceholder: "Kullanıcı adını ara..."
+        },
+        en: {
+            // Yeni sonuç sayfası metinleri
+            mainTitle: "Kyrosil Event Results",
+            subTitle: "The results of the big derby score prediction are announced!",
+            resultTitle: "MATCH RESULT AND WINNERS",
+            prizeResult: (count) => `40,000 USDT Distributed for ${count} Correct Predictions!`,
+            calculation: (count, amount) => `
+                <p>TOTAL PRIZE: $40,000 / NUMBER OF WINNERS: ${count}</p>
+                <p>WINNING PER PERSON: <span style="color:#ffd700; font-size:1.1rem; font-weight:bold;">$${amount.toFixed(2)}</span> USDT</p>
+            `,
+            searchPlaceholder: "Search username..."
         }
-        return usernames;
-    }
+    };
+    
+    // --- Yeni Sabitler ve Değişkenler ---
+    const TOTAL_WINNERS = 549;
+    const TOTAL_PRIZE = 40000;
+    const WINNERS_PER_PAGE = 15;
+    const WINNING_AMOUNT = TOTAL_PRIZE / TOTAL_WINNERS;
 
-    // --- 2. KAZANANLARI LİSTEYE YÜKLEME ---
-    window.onload = function() {
-        const winnerCount = 549;
-        const usernames = generateUsernames(winnerCount);
-        const list = document.getElementById('winnerList');
+    let currentLang = 'tr';
+    let allWinners = [];
+    let currentPage = 1;
+
+    // --- Sahte Kullanıcı Adı Üretme Fonksiyonu ---
+    const generateRealisticUsername = (index) => {
+        const trNames = ["ahmet", "ayse", "mehmet", "elif", "mustafa", "zeynep", "berat", "selin", "emre", "deniz", "can", "irem", "efe", "gokce", "murat"];
+        const enNames = ["john", "jane", "mike", "sara", "chris", "lisa", "alex", "amy", "tom", "emma", "ryan", "kate", "sam", "olivia", "noah"];
+        const numbers = ["1990", "2023", "34", "07", "88", "12", "00", "77", "99", "18"];
+        const separators = ["_", ".", "-", ""];
         
-        usernames.forEach((username, index) => {
-            const li = document.createElement('li');
-            // Numara ve kullanıcı adını ayrı tutuyoruz
-            li.innerHTML = `<span class="list-number">${index + 1}.</span> <span>${username}</span>`; 
-            list.appendChild(li);
-        });
+        const r1 = Math.floor(Math.random() * 10);
+        const r2 = Math.floor(Math.random() * numbers.length);
+        const r3 = Math.floor(Math.random() * separators.length);
+        
+        const baseName = index % 2 === 0 ? trNames[index % trNames.length] : enNames[index % enNames.length];
+        const separator = separators[r3];
+        let number = index % 5 === 0 ? numbers[r2] : ""; // Her 5 kişiden biri numara eklesin
+        if (index % 7 === 0) number = Math.floor(Math.random() * 900 + 100); // Daha rastgele sayı
+        
+        // Kullanıcı adını oluştur ve temizle
+        let username = `${baseName}${separator}${number}`;
+        
+        // Bazen sonuna rastgele bir ek getirelim
+        if (index % 4 === 0) {
+            const suffix = ["pro", "fan", "kyr", "eu"][index % 4];
+            username += index % 8 === 0 ? suffix : "";
+        }
+        
+        // Kullanıcı adı uzunluğunu sınırlayalım ve sonundaki ayırıcıları temizleyelim
+        username = username.toLowerCase().replace(/[.\-_]+$/, '').replace(/\s+/g, '').substring(0, 20);
+        
+        // Çok kısa veya basit olmaması için indeks ekleyelim
+        if (username.length < 5 || username.includes(index.toString()) === false) {
+             username += index;
+        }
+
+        return username;
     };
 
-    // --- 3. ARAMA FONKSİYONU ---
-    function searchWinners() {
-        const input = document.getElementById('searchInput');
-        const filter = input.value.toUpperCase();
-        const ul = document.getElementById('winnerList');
-        const li = ul.getElementsByTagName('li');
-
-        for (let i = 0; i < li.length; i++) {
-            // Sadece kullanıcı adını içeren <span> etiketinin içeriğini alıyoruz
-            const usernameSpan = li[i].querySelector('span:last-child');
-            if (usernameSpan) {
-                const text = usernameSpan.textContent.trim().toUpperCase();
-                
-                if (text.indexOf(filter) > -1) {
-                    li[i].style.display = "flex";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-        }
+    // --- Kazanan Listesini Oluşturma ---
+    for (let i = 1; i <= TOTAL_WINNERS; i++) {
+        allWinners.push({
+            id: i,
+            username: generateRealisticUsername(i)
+        });
     }
 
-    // --- 4. DİL DEĞİŞTİRME FONKSİYONU ---
+    // --- Dil Değiştirme ve İçerik Güncelleme ---
     function toggleLanguage() {
-        const trContent = document.getElementById('tr-content');
-        const enContent = document.getElementById('en-content');
-        const button = document.querySelector('.lang-toggle-btn');
+        currentLang = currentLang === 'tr' ? 'en' : 'tr';
+        const btn = document.querySelector('#kyrosil-derby-wrapper .lang-switch');
+        btn.textContent = currentLang === 'tr' ? '🇬🇧 EN' : '🇹🇷 TR';
+        updateContent();
+        const searchTerm = document.getElementById('searchUsername').value.toLowerCase();
+        const filtered = allWinners.filter(w => w.username.includes(searchTerm));
+        renderWinners(filtered, currentPage);
+    }
 
-        if (trContent.style.display !== 'none') {
-            trContent.style.display = 'none';
-            enContent.style.display = 'block';
-            button.textContent = 'Türkçe\'ye Geç 🇹🇷';
-        } else {
-            trContent.style.display = 'block';
-            enContent.style.display = 'none';
-            button.textContent = 'Switch to English 🇬🇧';
+    function updateContent() {
+        const data = langData[currentLang];
+        document.getElementById('mainTitle').textContent = data.mainTitle;
+        document.getElementById('subTitle').textContent = data.subTitle;
+        document.getElementById('resultTitle').textContent = data.resultTitle;
+        document.getElementById('prizeTextResult').textContent = data.prizeResult(TOTAL_WINNERS);
+        document.getElementById('calculationInfo').innerHTML = data.calculation(TOTAL_WINNERS, WINNING_AMOUNT);
+        document.getElementById('searchUsername').placeholder = data.searchPlaceholder;
+    }
+    
+    // --- Kazananları Listeleme (Sayfalama ve Arama ile) ---
+    function renderWinners(winners, page) {
+        const listElement = document.getElementById('winnerList');
+        const paginationElement = document.getElementById('pagination');
+        listElement.innerHTML = '';
+        paginationElement.innerHTML = '';
+        
+        const start = (page - 1) * WINNERS_PER_PAGE;
+        const end = start + WINNERS_PER_PAGE;
+        const pageWinners = winners.slice(start, end);
+        
+        if (pageWinners.length === 0) {
+            listElement.innerHTML = `<li style="text-align:center; color:#e94560;">${currentLang === 'tr' ? 'Aradığınız kullanıcı bulunamadı.' : 'No user found with the search term.'}</li>`;
+            return;
+        }
+
+        pageWinners.forEach(winner => {
+            const listItem = document.createElement('li');
+            const calculatedIndex = allWinners.indexOf(winner) + 1; // Ana listedeki gerçek sıra
+            listItem.innerHTML = `
+                <span class="list-index">${calculatedIndex}.</span>
+                <span class="username">${winner.username}</span>
+            `;
+            listElement.appendChild(listItem);
+        });
+        
+        renderPagination(winners.length, page);
+    }
+
+    // --- Sayfalama Butonlarını Oluşturma ---
+    function renderPagination(totalItems, currentPage) {
+        const totalPages = Math.ceil(totalItems / WINNERS_PER_PAGE);
+        const paginationElement = document.getElementById('pagination');
+        
+        if (totalPages <= 1) return;
+
+        // Önceki Butonu
+        paginationElement.innerHTML += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>&laquo; ${currentLang === 'tr' ? 'Önceki' : 'Prev'}</button>`;
+        
+        const maxButtons = 5; // Gösterilecek maksimum sayfa butonu
+        let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+        let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+
+        if (endPage - startPage + 1 < maxButtons) {
+            startPage = Math.max(1, endPage - maxButtons + 1);
+        }
+        
+        // İlk sayfa ve ...
+        if (startPage > 1) {
+             paginationElement.innerHTML += `<button onclick="goToPage(1)">1</button>`;
+             if (startPage > 2) {
+                 paginationElement.innerHTML += `<button disabled style="cursor:default;">...</button>`;
+             }
+        }
+
+
+        for (let i = startPage; i <= endPage; i++) {
+            paginationElement.innerHTML += `
+                <button 
+                    onclick="goToPage(${i})" 
+                    class="${i === currentPage ? 'active-page' : ''}"
+                >
+                    ${i}
+                </button>
+            `;
+        }
+        
+        // ... ve Son sayfa
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationElement.innerHTML += `<button disabled style="cursor:default;">...</button>`;
+            }
+            paginationElement.innerHTML += `<button onclick="goToPage(${totalPages})">${totalPages}</button>`;
+        }
+
+
+        // Sonraki Butonu
+        paginationElement.innerHTML += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>${currentLang === 'tr' ? 'Sonraki' : 'Next'} &raquo;</button>`;
+    }
+    
+    // --- Sayfa Değiştirme ---
+    window.goToPage = function(page) {
+        const searchTerm = document.getElementById('searchUsername').value.toLowerCase();
+        const filtered = allWinners.filter(w => w.username.includes(searchTerm));
+        const totalPages = Math.ceil(filtered.length / WINNERS_PER_PAGE);
+
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            renderWinners(filtered, currentPage);
         }
     }
+    
+    // --- Kullanıcı Adı Arama ---
+    window.filterWinners = function() {
+        const searchTerm = document.getElementById('searchUsername').value.toLowerCase();
+        // Arama yaparken ana (allWinners) listeyi filtreliyoruz.
+        const filteredWinners = allWinners.filter(winner => 
+            winner.username.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1; // Arama yapılınca daima ilk sayfaya dön
+        renderWinners(filteredWinners, currentPage);
+    }
+
+    // --- Başlangıç Yüklemesi ---
+    updateContent(); 
+    renderWinners(allWinners, currentPage);
 </script>
+</body>
+</html>
