@@ -23,6 +23,7 @@
         .pages button {background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;}
         .pages button.active,.pages button:hover {background:rgba(255,255,255,.3);}
         .result-count {text-align:center;color:#aaa;margin:10px 0;font-size:0.9rem;}
+        .info {background:rgba(255,255,255,0.1);padding:15px;border-radius:12px;margin:20px 0;text-align:center;line-height:1.6;font-size:0.95rem;border:1px solid rgba(255,255,255,0.1);}
     </style>
 </head>
 <body>
@@ -32,14 +33,19 @@
     
     <div style="text-align:center;margin-bottom:25px;">
         <img src="https://i0.wp.com/kyrosil.eu/wp-content/uploads/2025/04/adsiz-tasarim.png?fit=500%2C500&ssl=1" class="logo" alt="Kyrosil">
-        <h1>Kyrosil Dev Derbi Sonuçları</h1>
-        <p style="color:#bbb;">Maç 1-1 bitti • 549 kişi doğru tahmin etti</p>
+        <h1 id="title">Kyrosil Dev Derbi Sonuçları</h1>
+        <p id="subtitle" style="color:#bbb;">Maç 1-1 bitti • 549 kişi doğru tahmin etti</p>
     </div>
 
     <div class="prize">
         <i class="fas fa-trophy fa-2x"></i><br>
-        <div style="font-size:1.5rem;">40.000 USDT Ödül Havuzu</div>
-        <div style="margin-top:8px;font-weight:normal;">549 kazanan • Kişi başı ≈72.86 USDT</div>
+        <div id="prizeAmount" style="font-size:1.5rem;">40.000 USDT Ödül Havuzu</div>
+        <div id="prizeDetail" style="margin-top:8px;font-weight:normal;">549 kazanan • Kişi başı ≈72.86 USDT</div>
+    </div>
+
+    <div class="info" id="infoText">
+        Gönderimler bu gece takip kontrollerinin ardından USDT ERC20 adreslerinize sağlanacaktır.<br>
+        <strong>Tebrikler!</strong>
     </div>
 
     <div class="match">
@@ -63,7 +69,6 @@
 </div>
 
 <script>
-// Senin attığın temizlenmiş ve sıralanmış 549 kullanıcı adı
 const winners = [
 "blossom.vy","noctis_04","terraflint","solance","kayra.mint","vortex_92!","zenka","florafix19","mercuryline_","odin.x",
 "shadowvane","delta07run","eliawave","softbreezy","orion.exe","ayla_rain","bluewhale","krm-dark","galaxy37x","runa.sol",
@@ -136,6 +141,30 @@ const winners = [
 const perPage = 15;
 let currentPage = 1;
 
+const tr = {
+    title: "Kyrosil Dev Derbi Sonuçları",
+    subtitle: "Maç 1-1 bitti • 549 kişi doğru tahmin etti",
+    prizeAmount: "40.000 USDT Ödül Havuzu",
+    prizeDetail: "549 kazanan • Kişi başı ≈72.86 USDT",
+    infoText: "Gönderimler bu gece takip kontrollerinin ardından USDT ERC20 adreslerinize sağlanacaktır.<br><strong>Tebrikler!</strong>",
+    searchPlaceholder: "Kullanıcı adını ara...",
+    resultAll: "Toplam 549 kazanan gösteriliyor",
+    resultFound: "Arama sonucu: {count} kazanan bulundu"
+};
+
+const en = {
+    title: "Kyrosil Big Derby Results",
+    subtitle: "Match ended 1-1 • 549 people predicted correctly",
+    prizeAmount: "40,000 USDT Prize Pool",
+    prizeDetail: "549 winners • ≈72.86 USDT per person",
+    infoText: "Transfers will be sent tonight to your USDT ERC20 addresses after follow checks.<br><strong>Congratulations!</strong>",
+    searchPlaceholder: "Search username...",
+    resultAll: "Showing all 549 winners",
+    resultFound: "Search result: {count} winners found"
+};
+
+let lang = tr;
+
 function render() {
     const query = document.getElementById('search').value.toLowerCase().trim();
     const filtered = query === '' ? winners : winners.filter(u => u.toLowerCase().includes(query));
@@ -148,16 +177,15 @@ function render() {
         `<li>${start + i + 1}. @${user}</li>`
     ).join('');
 
-    document.getElementById('resultCount').textContent = 
-        query === '' ? 'Toplam 549 kazanan gösteriliyor' : `Arama sonucu: ${filtered.length} kazanan bulundu`;
+    document.getElementById('resultCount').innerHTML = 
+        query === '' ? lang.resultAll : lang.resultFound.replace('{count}', filtered.length);
 
-    // Sayfalama
     const totalPages = Math.ceil(filtered.length / perPage);
     let pagination = '';
     for (let i = 1; i <= totalPages; i++) {
         pagination += `<button ${i === currentPage ? 'class="active"' : ''} onclick="currentPage=${i};render()">${i}</button>`;
     }
-    document.getElementById('pages').innerHTML = pagination || '<div style="color:#aaa;padding:20px;">Sonuç bulunamadı</div>';
+    document.getElementById('pages').innerHTML = pagination || '<div style="color:#aaa;padding:20px;">No results found</div>';
 }
 
 function filter() {
@@ -166,13 +194,19 @@ function filter() {
 }
 
 function toggleLang() {
-    const btn = document.querySelector('.lang');
-    const isEN = btn.textContent === 'EN';
-    btn.textContent = isEN ? 'TR' : 'EN';
-    document.getElementById('search').placeholder = isEN ? 'Search username...' : 'Kullanıcı adını ara...';
+    lang = lang === tr ? en : tr;
+    document.querySelector('.lang').textContent = lang === tr ? 'EN' : 'TR';
+    
+    document.getElementById('title').textContent = lang.title;
+    document.getElementById('subtitle').textContent = lang.subtitle;
+    document.getElementById('prizeAmount').textContent = lang.prizeAmount;
+    document.getElementById('prizeDetail').innerHTML = lang.prizeDetail;
+    document.getElementById('infoText').innerHTML = lang.infoText;
+    document.getElementById('search').placeholder = lang.searchPlaceholder;
+    
+    render();
 }
 
-// İlk yükleme
 render();
 </script>
 </body>
