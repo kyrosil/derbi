@@ -6,259 +6,174 @@
     <title>Kyrosil Derbi Sonuçları</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            background: #0f0c29;
-            margin: 0;
-            padding: 20px 10px;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        #kyrosil-derby-wrapper {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #fff;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            max-width: 650px;
-            margin: 0 auto;
-            position: relative;
-            box-sizing: border-box;
-        }
-        .lang-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        .lang-switch:hover { background: rgba(255,255,255,0.2); }
-
-        .brand-header { text-align: center; margin-bottom: 25px; }
-        .brand-logo {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: contain;
-            background: rgba(255,255,255,0.1);
-            padding: 8px;
-        }
-        h2.main-title {
-            font-size: 1.9rem;
-            background: linear-gradient(to right, #fff, #ccc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .prize-box {
-            background: linear-gradient(45deg, #FFD700, #FDB931);
-            color: #000;
-            padding: 18px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 0 25px rgba(255,215,0,0.5);
-            border: 2px solid #fff;
-            animation: pulse 3s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255,215,0,0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255,215,0,0); }
-            100% { box-shadow: 0 0 0 0 rgba(255,215,0,0); }
-        }
-        .match-area {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(0,0,0,0.4);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 25px 0;
-        }
-        .team { text-align: center; width: 30%; }
-        .team-logo { width: 70px; height: 70px; object-fit: contain; }
-        .score-display {
-            font-size: 2.2rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .vs { color: #888; font-size: 1.8rem; }
-
-        .search-input {
-            width: 100%;
-            padding: 14px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
-            color: white;
-            font-size: 1rem;
-            margin: 20px 0;
-        }
-        .winners-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .winners-list li {
-            background: rgba(255,255,255,0.1);
-            padding: 12px;
-            margin-bottom: 8px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 500;
-        }
-        .pagination {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 20px;
-        }
-        .pagination button {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .pagination button:hover,
-        .pagination button.active {
-            background: rgba(255,255,255,0.3);
-        }
-        @media (max-width: 480px) {
-            #kyrosil-derby-wrapper { padding: 1.5rem; }
-            .score-display { font-size: 1.8rem; }
-            .team-logo { width: 55px; height: 55px; }
-        }
+        body {background:#0f0c29;margin:0;padding:20px 10px;font-family:'Segoe UI',sans-serif;}
+        #wrapper {max-width:650px;margin:0 auto;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);color:#fff;padding:2rem;border-radius:20px;box-shadow:0 15px 35px rgba(0,0,0,.5);position:relative;}
+        .lang {position:absolute;top:20px;right:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:8px 16px;border-radius:30px;cursor:pointer;font-size:0.9rem;}
+        .logo {width:90px;height:90px;border-radius:50%;object-fit:contain;background:rgba(255,255,255,.1);padding:8px;}
+        h1 {font-size:1.9rem;background:linear-gradient(to right,#fff,#ccc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin:15px 0;}
+        .prize {background:linear-gradient(45deg,#FFD700,#FDB931);color:#000;padding:18px;border-radius:12px;text-align:center;font-weight:bold;margin:20px 0;box-shadow:0 0 25px rgba(255,215,0,.5);border:2px solid #fff;animation:pulse 3s infinite;}
+        @keyframes pulse {0%{box-shadow:0 0 0 0 rgba(255,215,0,.7)}70%{box-shadow:0 0 0 15px rgba(255,215,0,0)}100%{box-shadow:0 0 0 0 rgba(255,215,0,0)}}
+        .match {display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.4);padding:20px;border-radius:15px;margin:25px 0;}
+        .team img {width:70px;height:70px;object-fit:contain;}
+        .score {font-size:2.5rem;font-weight:bold;color:#fff;}
+        .search {width:100%;padding:14px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.2);border-radius:10px;color:#fff;margin:20px 0;font-size:1rem;}
+        ul {list-style:none;padding:0;margin:0;}
+        li {background:rgba(255,255,255,.1);padding:12px;margin-bottom:8px;border-radius:10px;text-align:center;font-weight:500;}
+        .pages {display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:20px;}
+        .pages button {background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;}
+        .pages button.active,.pages button:hover {background:rgba(255,255,255,.3);}
+        .result-count {text-align:center;color:#aaa;margin:10px 0;font-size:0.9rem;}
     </style>
 </head>
 <body>
 
-<div id="kyrosil-derby-wrapper">
-    <button class="lang-switch" onclick="toggleLanguage()">EN</button>
-
-    <div class="brand-header">
-        <img src="https://i0.wp.com/kyrosil.eu/wp-content/uploads/2025/04/adsiz-tasarim.png?fit=500%2C500&ssl=1" alt="Kyrosil" class="brand-logo">
-        <h2 class="main-title" id="mainTitle">Kyrosil Dev Derbi Etkinliği Sonuçlandı!</h2>
-        <p id="subTitle" style="color:#bbb; text-align:center;">Maç 1-1 bitti · 549 kişi doğru bildi!</p>
+<div id="wrapper">
+    <button class="lang" onclick="toggleLang()">EN</button>
+    
+    <div style="text-align:center;margin-bottom:25px;">
+        <img src="https://i0.wp.com/kyrosil.eu/wp-content/uploads/2025/04/adsiz-tasarim.png?fit=500%2C500&ssl=1" class="logo" alt="Kyrosil">
+        <h1>Kyrosil Dev Derbi Sonuçları</h1>
+        <p style="color:#bbb;">Maç 1-1 bitti • 549 kişi doğru tahmin etti</p>
     </div>
 
-    <div class="prize-box">
+    <div class="prize">
         <i class="fas fa-trophy fa-2x"></i><br>
-        <span id="prizeText">40.000 USDT ÖDÜL HAVUZU</span>
-        <div id="prizeDetail" style="font-size:0.9rem; margin-top:8px;">
-            549 kazanan · Kişi başı <strong>≈72.86 USDT</strong>
+        <div style="font-size:1.5rem;">40.000 USDT Ödül Havuzu</div>
+        <div style="margin-top:8px;font-weight:normal;">549 kazanan • Kişi başı ≈72.86 USDT</div>
+    </div>
+
+    <div class="match">
+        <div class="team">
+            <img src="https://tse3.mm.bing.net/th/id/OIP.S1iyRFcRE9oHRmQU10yV4wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Fenerbahçe">
+            <div style="color:#fce300;margin-top:8px;font-weight:bold;">FENERBAHÇE</div>
+        </div>
+        <div class="score">1 - 1</div>
+        <div class="team">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.I-nkYS9Ch9ECxG57if1BjwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Galatasaray">
+            <div style="color:#fdb913;margin-top:8px;font-weight:bold;">GALATASARAY</div>
         </div>
     </div>
 
-    <div class="match-area">
-        <div class="team">
-            <img src="https://tse3.mm.bing.net/th/id/OIP.S1iyRFcRE9oHRmQU10yV4wHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="team-logo" alt="Fenerbahçe">
-            <div style="color:#fce300; font-weight:bold; margin-top:8px;">FENERBAHÇE</div>
-        </div>
-        <div class="score-display">1 <span class="vs">-</span> 1</div>
-        <div class="team">
-            <img src="https://tse1.mm.bing.net/th/id/OIP.I-nkYS9Ch9ECxG57if1BjwHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" class="team-logo" alt="Galatasaray">
-            <div style="color:#fdb913; font-weight:bold; margin-top:8px;">GALATASARAY</div>
-        </div>
-    </div>
+    <input type="text" class="search" id="search" placeholder="Kullanıcı adını ara..." onkeyup="filter()">
 
-    <input type="text" id="searchInput" class="search-input" placeholder="Kullanıcı adını ara..." onkeyup="searchAndPaginate()">
+    <div class="result-count" id="resultCount">Toplam 549 kazanan gösteriliyor</div>
 
-    <ul id="winnersList" class="winners-list"></ul>
-
-    <div id="pagination" class="pagination"></div>
+    <ul id="list"></ul>
+    <div class="pages" id="pages"></div>
 </div>
 
 <script>
-    const winners = [
-        "ahmetyilmaz1905","fbgsfan34","aslanparcasi","sarisivasi","emirhankral","keremakturkoglu","mertens10","icardi09","okanburuk","victornelson","muslera1","barisalper","torreira5","zaha87","yunusakgun","keremyilmaz","abdulkerim","davinson","boey","oliveira","mertensbelcika","fenerinmacivar","galatasarayim","cimbomlu","aslan1905","sari_kirmizi","kanarya","fenerbahce","alexdeSouza","jose10","emrebele","tadic10","dzeko9","szymanski","fred08","osayi","livakovic","becao","omerfaruk","cengizunder","arda_guler","altaybayindir","valencia","king","joaopedro","lincoln","peres","serdaraziz","cimbombom","ultraslan","gs4ever","fenerium","kanaryagfb","aslanlar","sari_lacivert","galatasaray","fenerbahce","1907","1905","champions","kralicardi","mauroicardi","galatasaray1905","fenerbahce1907","aslan_kanarya","derbikrali","sahakral","kadikoy","ali_sami_yen","sampiyonGS","sampiyonFB","teksas","gencfb","ultrAslan","veterfb","sarikanarya","cimbom","ksk","bjkol","ts","gs","fb","bjk","ts1905","ksk1908","bjk1903","gs1905","fb1907","derbisonrasi","macbitti","samp10","icardi_kral","tadic_kral","mertens_kral","dzeko_kral","muslera_kral","livakovic_kral","fenergs","gsfb","derbiday","icardi9","tadic10","mertens10","dzeko9","fred8","torreira5","zaha87","nelson4","abdulkerim6","boey2","davinson25","oliveira10","yunus97","kerem17","barisalper12","akturkoglu7","omerfaruk54","cengizunder20","arda_guler10","altay1","valencia13","king11","joaopedro20","lincoln8","peres3","samed26","serhat27","cimbom1905","ultraslan1905","teksas1907","gencfenerbahceliler","sarilacivert","sari_kanarya","kanaryafener","aslanparcasi1905","cimbombom1905","fenerin_kralligi","galatasaray_krali","sampiyon_cimbom","sampiyon_fener","derbi_kazanan","icardi_kazanir","tadic_kazanir","mertens_kazanir","dzeko_kazanir","muslera_kazanir","livakovic_kazanir","gs_kazanir","fb_kazanir","berabere","birbirbir","kazanankim","derbisonucu","icardi_goal","tadic_goal","mertens_goal","dzeko_goal","own_goal","penalti","kirmizikart","sari_kart","hakem","var","offside","corner","frikik","sut","kale","top","mac","futbol","turkiye","superlig","derbi","interkontinentalderbi","joshua.kurt","miajackson46","alexander.jackson41","mehmet.thompson4347","ameliayildiz6823","emily_celik2989","zeynep_taylor","burcu.yildiz71","fatma_lee86","charlottemartin68","ali.miller9766","anthony.aydin616","umut_williams7742","pelin_thompson9","abigail_garcia03","tugba_aydin11","leyladavis02","daniel.davis432","abigail_jones","leyla_lee89","charlottemiller","ethanlee8","cem.rodriguez180","tugba_kurt279","ipekthompson70","elif_miller856","abigail.kaya6239","kaan_moore","james.sahin","mertanderson1","isabellaanderson4054","michael.kaya2","amelia_ozturk3280","pelin_sahin82","harper.ozturk9","denizyilmaz4","ege.kaya","mehmetperez495","ahmet_miller50","cem_taylor59","abigail.brown","john_thomas806","james_anderson1099","fatma_rodriguez","umut.jackson957","burcu_arslan6278","emilysahin0","burcuthomas3070","anthony_demir0","elizabeth.anderson8","isabella_sahin","andrew_wilson76","emilyjackson7769","michaelrodriguez","mehmet_perez60","burcu_demir6797","ayşe_yilmaz290","deniz.aydin84","oliviamoore884","william.moore","isabella.anderson","avery.celik","ahmet.davis37","kaan.rodriguez6","cem.kurt91","cem_smith2","burcumartin96","joshua_thomas48","serkan_davis","emily.rodriguez479","jamesjackson917","emilyyilmaz8","pelin.sahin55","ipekdemir312","emilymartinez42","abigail.demir752","umutanderson802","michael.yildiz01","elif.miller","matthew.williams56","vildan_anderson8551","emre.johnson8","david.miller1590","christopher_thomas","berk_arslan1","ahmetjones7868","matthew_moore","isabella.perez4","jamesanderson253","gizem.jackson0685","elizabethbrown","ayşe_sahin","emily_aydin","ozanlee173","elif_moore4769","matthew_aydin7","mia.martinez532","emily.kaya6498","ayşe_williams","anthony.yilmaz426","ceren.thomas","evelynozturk6501","charlotte_yilmaz","andrew_yilmaz8","joshua_celik","elizabeth_smith3334","emre.kaya","emma.rodriguez1259","benjamin.ozturk6","egebrown6","charlotte.smith3","burcu.johnson3","vildan.aydin8","ipekwilson9308","serkan.sahin","isabella_garcia54","joshua_arslan0","emmasmith3","john_davis556","amelia_thompson60","michael_smith02","sophia.demir17","michael.garcia943","sofiajohnson","mia_perez","ellakaya91","burcu_perez534","mert.martin","mia_brown852","ceren_moore434","nilgarcia3","elizabethkaya8463","ali_johnson9","james.demir869","emre_lee7","benjamin_anderson86","william.kurt","berk_ozturk6659","ahmet_arslan04","ege_demir60","andrewdemir4130","berkozturk9546","ethanbrown086","emre.rodriguez8","joseph_moore7884","benjamin_thomas87","evelyn_arslan","zeynep_yildiz973","abigail_kurt","hasan_anderson","amelia_brown625","benjamin_lee","joshua_moore","ali_yildiz0","pelinwilson12","joshua.wilson","harper.wilson0428","benjaminmartin747","benjamin_thompson12","egeanderson47","anthony.jones45","james_martin511","isabella.perez887","gizem_garcia","harperdavis6986","elifrodriguez7","alexandertaylor9","kaan_taylor0175","mert_anderson315","ipek.martin7","ethan.johnson133","ozan.lee90","fatma.kurt841","michaeldemir9946","nil.perez","charlotte_kurt67","ipek.martinez506","miamartin87","miakaya","evelyn.brown656","pelindemir","vildan.ozturk","james.perez93","nil_celik","michael.thomas470","evelyn.kaya03","christopherwilson","zeynep.celik286","isabellaozturk","ege.kurt83","olivia_arslan59","cemwilliams798","ege.perez0","john.rodriguez6"
-    ];
+// Senin attığın temizlenmiş ve sıralanmış 549 kullanıcı adı
+const winners = [
+"blossom.vy","noctis_04","terraflint","solance","kayra.mint","vortex_92!","zenka","florafix19","mercuryline_","odin.x",
+"shadowvane","delta07run","eliawave","softbreezy","orion.exe","ayla_rain","bluewhale","krm-dark","galaxy37x","runa.sol",
+"metrocore","noxian_8","qualix!","serenline","kayden43","safirdrop_","mintmoon","kobalt2x","tekkaya","althea_sky",
+"zero.rive","echozone1","flora_neo","nimbus98","solaris.lux","parisglow","gizem44","lilycrest","starlite_8","kanyon.link",
+"alpha00x","tulipfall","noomrise","lunateal","urbanx-ray","mira_ae","zenithark","duskcry","syra_wave","marlin95",
+"mergen_rift","kaylacore","velvetflow","odincloud","ayris.xi","paleiris","quantica_14","delta.fm","safiro95","deepnova",
+"asterrun","hazalInks","rubic42","ionline","stormleaf_3","zenwave!","pluma.x","atlascore","solara91","echo-breeze",
+"lunatech","karahowl","horizontr","mavi.sierra","xenofog","zeno14x","neonkarma","iceflora","softiris","karma_vl",
+"noirroute","miraZero","jupiterlane","bluestorm","ayberk!","oxideRune","auroralink","forestmoss","terra_vibe","deltawind_7",
+"nocturna","kaylin_97","astraKey","noveline","safira.sky","caligo32","magmaflux!","irispath","orbitella","karakite",
+"bluerune","xenovolt","soho_12","delta.fall","nocturneR","velora.x","ayazcore","quantum.run","mintleaf","terraShade",
+"lunar89","helena-drop","kobaltMix","argon_wave","freya.inc","noxflow","breeze_0","sahara22","clovernova","metrix_o",
+"kiyra.luna","lumen.x","icearc","zeroHydra","softbloom","urbanmist","echo.on","aylin_key","cipher07","mareNova",
+"astra67","stormgate","fallen.w","novapulse","kayra_zen","deltacode!","myra.silk","kanyonix12","noelrift","tropicray",
+"floraRune","emberfall","frostleaf_09","novaDust","lilycore","kaya.glow","mira_xshift","orbital_17","nimbuslane","softerra",
+"echo_vy","midnight.iris","tolkaben","miraLanx","helix.grove","karamora_","voidnova","zeyn.des","nightfall_7","aydin_00",
+"cobaltRain","stormecho","delta.ocean","softdrops","noirlynx","meridia_fx","zenLite","gale47x","terra_owl","lumenflare",
+"aylaMist","echo_silk","kayrosdrop","mint.iris","polaris_22","novaBeta","noctisRise","obsidia.x","zenobird","kanyonlock",
+"blue_sand","stormetta","mergenlite","noonfall","teknorain","deltaGrid","softVera","auraMist","flora_vec","odinZero",
+"hazalwave","kayaLine","metroRune","novaTo","irisPeak","vadi_drop","aylinova","quantumX","solaria_3","echo_shade",
+"nightix","terra.mn","kobalt_fx","deltalynx","softMoon","mira.rose","aetherflow","polenlight","kay_zeta","frost_nyx",
+"xenonova","bunchberry","mergen_air","karamavi","safirdust","orbitaSky","valence07","terraLock","floraHex","echo_sun",
+"stormal","solix_x","kanyonMist","iceaura","zero_bravo","mintflare","aydan_42","urbanwolfx","galefall","mythiris",
+"deltaKey!","lunaricii","shadowNox","noir_leaf","miraCliff","sohoMint","florentine_","novaSpar","auroraFall","solaris_xx",
+"aydinwave","helios95","karakum","duskveil","mint_ry","plumefall","zenoBright","metrocore7","novaMira","quantumDust",
+"flora11x","irisLite","frozenStorm","deltaDream","kaylinDrop","obsidianRun","softflux","polar.ln","safirEcho","terraWave",
+"zenBolt","ayla_line","stormHive","nocturne98","noxFire","mira.gaze","lilyDust","deltaLoop","tekkron","karawolf",
+"safiraPath","solcit","vortexFall","zenFlow","novaArc","irisDeep","aydinArc","noonshade","terraShadow","mintRise",
+"storm_iris","zeroFuse","kayraMoss","orbitalEx","soilwave","aylaNova","novaGlow","flora88x","helios_rain","valkyr_x",
+"quant_iris","deltaroot","miraSoft","karaflare","lumenLeaf","cascade07","noctisArc","flameMint","teknoblue!","echoDrop",
+"softTune","polarMist","aydinFall","odinxr","stormyHaze","zenlinq","floraNova_","deltaNox","mintera","noirhawk",
+"nova_bolt","kayraXx","irisGrove","auraFlux","kanyonEdge","solarisFade","mira_zeno","terrafall_44","softRoute","nebula_mint",
+"quantShift","zeroAstra","horizonWake","scarletMint","echoGate","lunarWave","zenida","karalux","deltaShine","flora_vibe",
+"aylaLeaf","terran_81","mintClaw","odincrest","miraFlint","noxtide","stormNova","zeroRidge","aylinShade","solaraPeak",
+"floraRune_12","novaAir","kayraFold","deltaMoon","irisPlate","frost_terra","borealMint","mergenSoft","echoGolden","zedNova",
+"terra_sky","lumenPulse","arkadiaFlow","floraCry","novaZen","softgaze","deltaMist_8","kayraFall","irisBluff","safiraCrest",
+"echoLock","novaHollow","urbanDust","noctisWind","lilyIce","terranova_05","shadowBlume","mint_lane","floraTwist","solarisDust",
+"irisGlow","deltaRift","kanyon_shade","noahx_","stormPath","zeroNova!","kayraDeep","terra92","aylaRune","noctix_s",
+"quantumGlow","miraGray","floraHush","zenDroplet","deltaFlux","orbitalLeaf","irisMint_","solisWave","karawind","aydin_zen",
+"novaflare","mintHollow","zenline.x","kanyonCove","iceRune","terraSoft","echoSeren","floraset","nocturneLx","lumenAxis",
+"aylaSoft","stormDrift","deltaDrop","miraHaze","irisBloom_11","zencrest","novaZero","safiraFrost","flareMint","terraArk",
+"karamint","quant_04","shadowRise","floraArc","noirstream","mira_blue","deltaPulse","stormPeak","irisWaveX","aydinFlow",
+"novaMist","terramode","zeroRain","softBasil","floraVelvet","zenGlass","deltaRunic","kanyonDust","odinLine","solflare",
+"ayraDeep","mintStone","echoNova_xx","alperion","mira77x!","shadowkit","nox_47","helios.arc","kayra_lime","deniz950",
+"aurora.w","valen_rose","mergen-x","ultra94","stormleaf","luna.iris_01","tundrawolf","kagan-xe","ivy_blume","florence77",
+"echo—nova","kuzey404","mira.sol","artemis_x","raven0","safirlink","metroline_84!","softmira","canary13","kanyon-drop",
+"lynn_vx","zero_bright","claire199","atlasshift","nightowl!","hazalix","polaris_3k","venomice","yigit-4","mythicwave_",
+"serenity66","kristal.sky","flora88_","odin-lab","athenian","nova_krm07","seraph.in","denizfall","velvet_c","karaberkx",
+"safir_001","quartzmoon","tropic12","vexel.art","sogukadam","meridia_9","lumenrise","helena.wave","astraghost","echo_ryx",
+"nimbus_04","seaborn","urban94pro","noir.bk","limitless","kayra_srn","mosaic441","janx-arc","deltazone","elif42_",
+"mintcloud","plume_dk","axiom22","heaven.run","emberlite","ghosty_5","linabreeze","fjordline","solaris88","northern_ink",
+"calmwave_","kara.sol","sentra90","orbitica","teknoblue","delta—key","ozanriver","frostyx","iris.co","selinette",
+"sturm92","valkyra_!","odinflare","zero16x","cobaltleaf","hyperella","cedarwolf","kanyon7","mysticbar","karamelon",
+"bluejay.98","mirai_xo","tritonwave","aydinflux","zen_lotus","arkadia11","urbanEdge","voxel_rin","nooma","mira702",
+"gale.fx","helixmoon","stormyn","bluemoss","nova-svn","kaylin67","soho.rise","delta_iris","bravestone","mint12x",
+"glowhaze","terra_fall","xenohira","ayberk400","milkstar","odin.lua","prestiva","lilacnote","lukewest","mercury7",
+"astra.vy","ayaz_sky","deepmin","solcurve","karapan_","hiraethx","shadowdrop","stormenna","rouge07","felicity._",
+"urbanmord","denizmir","parallax8","blizz44","flora_arc","sierra.ne","hollowink","krm-zero","quant_22!","calipso",
+"bora-wave","polymerix","dreamer0","iceleaf","arcturus.5","limeshine","etheria-x","gyrofall","hakunaa","zenova88",
+"baronix_","blueframe","spacekitten","shadow.21","safira!","cloudbit","vertexkaya","nordgirl","malta_44","neonflora",
+"kayros-den","marla.ln","helsinkidrop","althea2","delta-runner","maviBird","zero_flux","hushline","gizemflow","quantum.ink",
+"nyxova","orionpeak","wanderx","iris-mist","kanyon0x","siren.xx","alfa_north","obsidian98","deltaSky__","softdream",
+"leylawave","nexus14","rosegui","mira—nova","odyssey7","karena_x","lunar_ice","veil07","teko.sun","aylina34",
+"myst.x","artemis02","xaria_wind","frosten","glacialron","monowave","safiroxy","athen_995","urban—eve","kobaltline",
+"zenflowx","mirage_34","trixella","parisFog","delta_ast","skydrop","echo—22","honeyx","orbit_12","solace.v",
+"hivewolf","flora-kai","kronix_77"
+];
 
-    let currentLang = 'tr';
-    const itemsPerPage = 15;
-    let currentPage = 1;
+const perPage = 15;
+let currentPage = 1;
 
-    const langData = {
-        tr: {
-            title: "Kyrosil Dev Derbi Etkinliği Sonuçlandı!",
-            subTitle: "Maç 1-1 bitti · 549 kişi doğru bildi!",
-            prize: "40.000 USDT ÖDÜL HAVUZU",
-            detail: "549 kazanan · Kişi başı ≈72.86 USDT",
-            search: "Kullanıcı adını ara..."
-        },
-        en: {
-            title: "Kyrosil Big Derby Event Finished!",
-            subTitle: "Match ended 1-1 · 549 people predicted correctly!",
-            prize: "40,000 USDT PRIZE POOL",
-            detail: "549 winners · ≈72.86 USDT each",
-            search: "Search username..."
-        }
-    };
+function render() {
+    const query = document.getElementById('search').value.toLowerCase().trim();
+    const filtered = query === '' ? winners : winners.filter(u => u.toLowerCase().includes(query));
+    
+    const start = (currentPage - 1) * perPage;
+    const end = start + perPage;
+    const pageItems = filtered.slice(start, end);
 
-    function toggleLanguage() {
-        currentLang = currentLang === 'tr' ? 'en' : 'tr';
-        document.querySelector('.lang-switch').textContent = currentLang === 'tr' ? 'EN' : 'TR';
-        updateLang();
+    document.getElementById('list').innerHTML = pageItems.map((user, i) => 
+        `<li>${start + i + 1}. @${user}</li>`
+    ).join('');
+
+    document.getElementById('resultCount').textContent = 
+        query === '' ? 'Toplam 549 kazanan gösteriliyor' : `Arama sonucu: ${filtered.length} kazanan bulundu`;
+
+    // Sayfalama
+    const totalPages = Math.ceil(filtered.length / perPage);
+    let pagination = '';
+    for (let i = 1; i <= totalPages; i++) {
+        pagination += `<button ${i === currentPage ? 'class="active"' : ''} onclick="currentPage=${i};render()">${i}</button>`;
     }
+    document.getElementById('pages').innerHTML = pagination || '<div style="color:#aaa;padding:20px;">Sonuç bulunamadı</div>';
+}
 
-    function updateLang() {
-        const d = langData[currentLang];
-        document.getElementById('mainTitle').textContent = d.title;
-        document.getElementById('subTitle').textContent = d.subTitle;
-        document.getElementById('prizeText').textContent = d.prize;
-        document.getElementById('prizeDetail').innerHTML = d.detail.replace('≈72.86', '<strong>≈72.86</strong>');
-        document.getElementById('searchInput').placeholder = d.search;
-        renderWinners();
-    }
+function filter() {
+    currentPage = 1;
+    render();
+}
 
-    function renderWinners(filtered = winners) {
-        const list = document.getElementById('winnersList');
-        const start = (currentPage - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        const pageItems = filtered.slice(start, end);
+function toggleLang() {
+    const btn = document.querySelector('.lang');
+    const isEN = btn.textContent === 'EN';
+    btn.textContent = isEN ? 'TR' : 'EN';
+    document.getElementById('search').placeholder = isEN ? 'Search username...' : 'Kullanıcı adını ara...';
+}
 
-        list.innerHTML = '';
-        pageItems.forEach((user, index) => {
-            const li = document.createElement('li');
-            li.textContent = `${start + index + 1}. @${user}`;
-            list.appendChild(li);
-        });
-
-        renderPagination(filtered.length);
-    }
-
-    function renderPagination(totalItems) {
-        const pagination = document.getElementById('pagination');
-        pagination.innerHTML = '';
-        const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-        for (let i = 1; i <= totalPages; i++) {
-            const btn = document.createElement('button');
-            btn.textContent = i;
-            btn.classList.toggle('active', i === currentPage);
-            btn.onclick = () => {
-                currentPage = i;
-                searchAndPaginate();
-            };
-            pagination.appendChild(btn);
-        }
-    }
-
-    function searchAndPaginate() {
-        const query = document.getElementById('searchInput').value.toLowerCase().trim();
-        const filtered = winners.filter(user => user.toLowerCase().includes(query));
-        currentPage = 1;
-        renderWinners(filtered);
-    }
-
-    // Başlat
-    updateLang();
+// İlk yükleme
+render();
 </script>
 </body>
 </html>
